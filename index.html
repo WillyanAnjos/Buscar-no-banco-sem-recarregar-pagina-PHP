@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Sistema de buscas</title>
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <h2>Pesquise um nome</h2>
+    <form action="" method="post">
+        <input type="text" name="pesq" id="pesq">
+    </form>
+
+    <ul class="resultado">
+
+    </ul>
+</body>
+
+<script>
+
+    $(function(){
+        $("#pesq").keyup(function(){
+            var pesquisa = $(this).val();
+
+
+            //Verifica se tem texto digitado
+            if(pesquisa != ''){
+                var dados = {
+                    //Palavra será enviada pelo POST
+                    palavra : pesquisa
+                }
+                $.post('procurar.php', dados, function (retorna) {
+                    $(".resultado").html(retorna);
+                });
+        }else{
+            $(".resultado").html('');
+        }
+        });
+    });
+
+</script>
+</html>
